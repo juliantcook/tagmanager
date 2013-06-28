@@ -50,6 +50,7 @@
       tagCloseIcon: '×',
       tagClass: '',
       validator: null,
+      removeValidator: null,
       onlyTagList: false
     };
 
@@ -101,6 +102,7 @@
     var inputBaseClass = 'tm-input';
 
     if ($.isFunction(tagManagerOptions.validator)) obj.data('validator', tagManagerOptions.validator);
+    if (jQuery.isFunction(tagManagerOptions.removeValidator)) obj.data('removeValidator', tagManagerOptions.removeValidator);
 
     var setupTypeahead = function () {
       if (!obj.typeahead) return;
@@ -261,7 +263,9 @@
       }
     };
 
-    var spliceTag = function (tagId) {
+    var spliceTag = function (tagId, tag) {
+      if (obj.data('removeValidator') && !obj.data('removeValidator')(tag)) return;
+
       var tlis = obj.data("tlis");
       var tlid = obj.data("tlid");
 
@@ -360,7 +364,7 @@
         $el.find("#" + newTagRemoveId).on("click", obj, function (e) {
           e.preventDefault();
           var TagIdToRemove = parseInt($(this).attr("TagIdToRemove"));
-          spliceTag(TagIdToRemove, e.data);
+          spliceTag(TagIdToRemove, tag, e.data);
         });
 
         refreshHiddenTagList();
