@@ -372,6 +372,8 @@
       obj.val("");
     };
 
+    obj.data('pushTag', pushTag);
+
     var prefill = function (pta) {
       $.each(pta, function (key, val) {
         pushTag(val);
