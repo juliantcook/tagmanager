@@ -102,7 +102,7 @@
     var inputBaseClass = 'tm-input';
 
     if ($.isFunction(tagManagerOptions.validator)) obj.data('validator', tagManagerOptions.validator);
-    if (jQuery.isFunction(tagManagerOptions.removeValidator)) obj.data('removeValidator', tagManagerOptions.removeValidator);
+    if ($.isFunction(tagManagerOptions.removeValidator)) obj.data('removeValidator', tagManagerOptions.removeValidator);
 
     var setupTypeahead = function () {
       if (!obj.typeahead) return;
