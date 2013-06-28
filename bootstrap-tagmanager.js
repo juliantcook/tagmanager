@@ -293,7 +293,7 @@
       }
     };
 
-    var pushTag = function (tag) {
+    var pushTag = function (tag, noValidate) {
       tag = trimTag(tag);
 
       if (!tag || tag.length <= 0) return;
@@ -307,7 +307,7 @@
       }
 
       // call the validator (if any) and do not let the tag pass if invalid
-      if (obj.data('validator') && !obj.data('validator')(tag)) return;
+      if (!noValidate && obj.data('validator') && !obj.data('validator')(tag)) return;
 
       var tlis = obj.data("tlis");
       var tlid = obj.data("tlid");
@@ -380,7 +380,7 @@
 
     var prefill = function (pta) {
       $.each(pta, function (key, val) {
-        pushTag(val);
+        pushTag(val, true);
       });
     };
 
